@@ -1,5 +1,4 @@
 import sys
-import wrapt
 import functools
 from itertools import chain
 from collections import defaultdict
@@ -26,7 +25,7 @@ class Pattern(object):
     def __init__(self, callable_pattern, request=None):
         self.is_pattern = True
         self.callable = callable_pattern
-        self.description = callable_pattern.__doc__
+        self.description = callable_pattern.__doc__.strip()
         # weird hack from Django
         patterns_module = sys.modules[callable_pattern.__module__]
         self.module = patterns_module.__name__.split('.')[-2]

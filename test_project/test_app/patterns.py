@@ -26,6 +26,10 @@ def example_table(request):
 @is_pattern(assets={'top': ['css/example_base.css',
                             'css/example_breadcrumbs.css']})
 def example_breadcrumbs(request):
+    """
+    Breadcrumbs should be used to highlight the URI's position in a heirarchy,
+    and not for anything equating to a user's browsing history.
+    """
     users = [User(
         username='username{0}'.format(randint(1, 1000)),
         first_name='ForeName {0}'.format(randint(1, 10)),
@@ -39,6 +43,11 @@ def example_breadcrumbs(request):
 
 
 class ExamplePagination(object):
+    """
+    Pagination should output all possible pages, with next and previous links
+    as appropriate. Invalid states should be marked as disabled, and the
+    current page should be highlighted visually.
+    """
     is_pattern = True
 
     assets = {
