@@ -34,7 +34,7 @@ def make_readme(root_path):
     FILES = ('README.rst', 'LICENSE', 'CHANGELOG', 'CONTRIBUTORS')
     for filename in FILES:
         filepath = os.path.realpath(os.path.join(HERE, filename))
-        is os.path.isfile(filepath):
+        if os.path.isfile(filepath):
             with open(filepath, mode='r') as f:
                 yield f.read()
 
