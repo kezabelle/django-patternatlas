@@ -1,2 +1,3 @@
 importd>=0.2.9
 django-debug-toolbar>=1.0.1
+docutils>=0.11

@@ -1,3 +1,11 @@
+"""
+The following examples are taken verbatim from `Bootstrap`_, in terms of
+both HTML and CSS.
+
+Examples of both function and class based patterns are provided.
+
+.. _Bootstrap: http://getbootstrap.com/
+"""
 from random import randint
 from django.contrib.auth.models import User
 from django.template.context import RequestContext

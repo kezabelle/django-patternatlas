@@ -2,14 +2,16 @@ import sys
 import functools
 from itertools import chain
 from collections import defaultdict
+from docutils.examples import html_parts
 try:
     from django.utils.text import camel_case_to_spaces as get_verbose_name
 except ImportError:  # pragma: no cover (Django < 1.7)
     from django.db.models.options import get_verbose_name
-from django.utils.encoding import python_2_unicode_compatible
+from django.utils.encoding import python_2_unicode_compatible, force_text
 from django.db import transaction
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.utils.text import mark_safe
 try:
     from importlib import import_module
 except ImportError:
@@ -20,15 +22,23 @@ from .templatetags.patternatlas import fix_raw_asset
 @python_2_unicode_compatible
 class Pattern(object):
     __slots__ = ('callable', 'callable_name', 'description', 'is_pattern',
-                 'module', 'name', 'request', '_assets', '_content')
+                 'module', 'name', 'request', '_assets', '_content',
+                 'module_description')
 
     def __init__(self, callable_pattern, request=None):
         self.is_pattern = True
         self.callable = callable_pattern
-        self.description = callable_pattern.__doc__.strip()
+        desc = callable_pattern.__doc__
+        if desc is not None:
+            desc = desc.strip()
+        self.description = desc
         # weird hack from Django
         patterns_module = sys.modules[callable_pattern.__module__]
         self.module = patterns_module.__name__.split('.')[-2]
+        mod_desc = patterns_module.__doc__
+        if mod_desc is not None:
+            mod_desc = mod_desc.strip()
+        self.module_description = mod_desc
         self.callable_name = self.callable.__name__
         self.name = get_verbose_name(self.callable_name).replace('_', ' ')
         self.request = request
@@ -97,6 +107,14 @@ class Pattern(object):
 
     def __contains__(self, lookup):
         return lookup == self.callable
+
+    @property
+    def __doc__(self):
+        return self.description
+
+    @property
+    def __moduledoc__(self):
+        return self.module_description
 
 
 @python_2_unicode_compatible
@@ -217,7 +235,8 @@ class Atlas(object):
     __bool__ = __nonzero__
 
     def __str__(self):
-        return 'atlas containing {count} patterns'.format(count=len(self))
+        return '{cls} containing {count} patterns'.format(
+            count=len(self), cls=self.__class__.__name__)
 
     def __repr__(self):
         patts = (repr(pattern) for pattern in self.discovered)
@@ -228,6 +247,39 @@ class Atlas(object):
     def __add__(self, other):
         return self.__class__(presets=chain(self.discovered, other.discovered),
                               request=self.request or other.request)
+
+    @property
+    def __doc__(self):
+        # output module's description if we're in an app only Atlas.
+        if len(self.app_labels()) == 1:
+            doc = self.discovered[0].module_description or ''
+        else:
+            patts = (repr(pattern) for pattern in self.discovered)
+            title = force_text(self)
+            doc = """
+            {sep}
+            {cls}
+            {sep}
+
+            The following have been defined:
+            {patterns}
+            """.format(cls=title, sep='=' * len(title),
+                       patterns="\n\n".join(patts))
+        return "\n".join(x.strip() for x in doc.splitlines())
+
+    def description(self):
+        docstring = self.__doc__
+        if len(docstring) < 1:
+            return ''
+        try:
+            parsed = html_parts(force_text(docstring))['body']
+        except:
+            if settings.DEBUG:
+                raise
+            parsed = docstring
+        return mark_safe(parsed)
+
+    module_description = description
 
 
 def is_pattern(func=None, assets=None):

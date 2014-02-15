@@ -1,3 +1,9 @@
+"""
+This just serves to demonstrate the _splitting_ and __filtering__ by
+application.
+
+Also we don't support markdown.
+"""
 from django.template.context import RequestContext
 from django.template.loader import render_to_string
 from patternatlas import is_pattern
