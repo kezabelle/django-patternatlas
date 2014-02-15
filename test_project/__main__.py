@@ -26,6 +26,7 @@ d(
         "test_app",
         "another_test_app",
         "patternatlas",
+        "django_medusa",
     ],
     MIDDLEWARE_CLASSES=[
         "django.middleware.common.CommonMiddleware",
@@ -69,6 +70,8 @@ d(
     SESSION_ENGINE="django.contrib.sessions.backends.file",
     STATIC_URL='/s/',
     MEDIA_URL='/m/',
+    MEDUSA_RENDERER_CLASS="django_medusa.renderers.DiskStaticSiteRenderer",
+    MEDUSA_DEPLOY_DIR=os.path.realpath(os.path.join(HERE, '_build')),
 )
 
 from django.conf.urls import include
