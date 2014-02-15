@@ -1,0 +1,11 @@
+<ul class="pagination">
+  <li><a href="#">&laquo;</a></li>
+
+  {% for page in pages %}
+  <li {% if page == 3 %}class="disabled"{% endif %} {% if page == 6 %}class="active"{% endif %}>
+    <a href="#{{ page }}">{{ page }}</a>
+  </li>
+  {% endfor %}
+
+  <li><a href="#">&raquo;</a></li>
+</ul>

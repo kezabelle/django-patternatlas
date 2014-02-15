@@ -34,3 +34,18 @@ def example_breadcrumbs(request):
     }
     return render_to_string('example_breadcrumbs.html', context,
                             context_instance=RequestContext(request))
+
+
+
+class ExamplePagination(object):
+    is_pattern = True
+
+    def __init__(self, request):
+        self.request = request
+
+    def __call__(self, request):
+        context = {
+            'pages': range(1, 10),
+        }
+        return render_to_string('example_pagination.html', context,
+                                context_instance=RequestContext(request))

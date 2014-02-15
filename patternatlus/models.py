@@ -36,6 +36,9 @@ class Pattern(object):
         # sid = transaction.savepoint()
         try:
             output = self.callable(request=self.request)
+            while callable(output):
+                # it's probably a class instance, or a response generator
+                output = output(request=self.request)
         finally:
             transaction.abort()
             # transaction.savepoint_rollback(sid)
