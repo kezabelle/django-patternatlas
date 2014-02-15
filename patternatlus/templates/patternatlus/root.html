@@ -1,0 +1,22 @@
+{% extends "patternatlus/base.html" %}
+
+{% block title %}Pattern Atlus, a styleguide.{% endblock %}
+
+{% block content %}
+<h1>Pattern Atlus</h1>
+<ol class="django-patternatlus-applist">
+{% for x in atlus.app_labels %}
+<li class="django-patternatlus-applist-item">
+    <a href="#{{ x|slugify }}">{{ x }}</a>
+</li>
+{% endfor %}
+</ol>
+
+{% for x in atlus %}
+    {% ifchanged x.module %}
+    <a name="{{ x.module|slugify }}"></a>
+    <h2>{{ x.module }}</h2>
+    {% endifchanged %}
+    {% include "patternatlus/_pattern.html" with pattern=x %}
+{% endfor %}
+{% endblock %}

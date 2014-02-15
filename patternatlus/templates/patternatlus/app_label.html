@@ -1,0 +1,17 @@
+{% extends "patternatlus/root.html" %}
+
+{% block title %}Patterns for ??&mdash;{{ block.super }}{% endblock %}
+
+{% block content %}
+<dl class="django-patternatlus-patternlist">
+    <dt>appname</dt>
+    {% for x in app_atlus %}
+    <dd class="django-patternatlus-patternlist-item">
+       <a href="{{ x.get_absolute_url }}">{{ x.name }}</a>
+       {% if x.description %}
+       <p>{{ x.description }}</p>
+       {% endif %}
+    </dd>
+    {% endfor %}
+</dl>
+{% endblock %}

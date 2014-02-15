@@ -1,0 +1,8 @@
+<section class="django-patternatlus-pattern">
+    <h2><a href="{{ pattern.get_parent_url }}">{{ pattern.module }}</a></h2>
+    <h3><a href="{{ pattern.get_absolute_url }}">{{ pattern.name }}</a></h3>
+    {% if pattern.description %}
+    <p>{{ pattern.description }}</p>
+    {% endif %}
+    {{ pattern.content }}
+</section>

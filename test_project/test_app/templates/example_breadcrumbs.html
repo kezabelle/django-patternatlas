@@ -1,0 +1,7 @@
+<ol class="breadcrumb">
+    {% for obj in object_list %}
+    <li {% if forloop.last %}class="active"{% endif %}>
+    <a href="#">{{ obj.first_name }} </a>
+    </li>
+    {% endfor %}
+</ol>
