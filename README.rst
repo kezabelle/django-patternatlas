@@ -80,3 +80,16 @@ In theory, when a ``Pattern`` is rendered (by calling ``.content``, in a templat
 it will attempt to abort any database transactions in progress, so that the patterns you write can interact with the database.
 
 How well that works, I don't really know yet, and for performance reasons alone I'd suggest avoiding hitting the database, instead favouring constructing your ``Model`` instances without calling ``.save()`` on them, or creating a giant dictionary of values that fulfils the contract between the template and the context.
+
+Freezing your style guide
+-------------------------
+
+Currently, support for building your style guide into static HTML is only
+available using `django_medusa`_, though this may expand in future.
+
+To freeze, add ``django_medusa`` to your ``INSTALLED_APPS``, set the
+required configuration variables, and do::
+
+    python manage.py staticsitegen
+
+.. _django_medusa: https://github.com/mtigas/django-medusa

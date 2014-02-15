@@ -1,2 +1,3 @@
 *.sqlite
 test_project/_build
+LONGDESC.html
