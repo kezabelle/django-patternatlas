@@ -3,7 +3,7 @@
 all: help
 
 help:
-	@echo "django-patternatlas version 0.1.0"
+	@echo "django-patternatlas version 0.1.1"
 	@echo
 	@echo "clean-build - remove build artifacts"
 	@echo "clean-pyc - remove Python file artifacts"
@@ -16,7 +16,7 @@ help:
 	@echo "release - package a release"
 
 release: clean requirements
-	wget http://b.repl.ca/v1/version-0.1.0-lightgrey.png --output-document=docs/version.png
+	wget http://b.repl.ca/v1/version-0.1.1-lightgrey.png --output-document=docs/version.png
 	python setup.py sdist bdist_wheel
 	bumpversion --patch
 	twine upload dist/*
