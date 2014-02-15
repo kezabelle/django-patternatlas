@@ -1,5 +1,8 @@
 import sys
+import wrapt
+import functools
 from itertools import chain
+from collections import defaultdict
 try:
     from django.utils.text import camel_case_to_spaces as get_verbose_name
 except ImportError:  # pragma: no cover (Django < 1.7)
@@ -12,12 +15,13 @@ try:
     from importlib import import_module
 except ImportError:
     from django.utils.importlib import import_module
+from .templatetags.patternatlus import fix_raw_asset
 
 
 @python_2_unicode_compatible
 class Pattern(object):
     __slots__ = ('callable', 'callable_name', 'description', 'is_pattern',
-                 'module', 'name', 'request')
+                 'module', 'name', 'request', '_assets', '_content')
 
     def __init__(self, callable_pattern, request=None):
         self.is_pattern = True
@@ -29,14 +33,25 @@ class Pattern(object):
         self.callable_name = self.callable.__name__
         self.name = get_verbose_name(self.callable_name).replace('_', ' ')
         self.request = request
+        self._content = None
+        self._assets = None
 
-    def content(self):
+    def _get_content(self):
         transaction.enter_transaction_management()
         # transaction.managed(False)
         # sid = transaction.savepoint()
+        self._assets = defaultdict(list)
         try:
-            output = self.callable(request=self.request)
+            output = self.callable
             while callable(output):
+
+                # collect css/js in an ordered fashion, de-duping on the way.
+                if hasattr(output, 'assets'):
+                    for key, value in output.assets.items():
+                        for thing in value:
+                            if thing not in self._assets[key]:
+                                self._assets[key].append(thing)
+
                 # it's probably a class instance, or a response generator
                 output = output(request=self.request)
         finally:
@@ -44,6 +59,16 @@ class Pattern(object):
             # transaction.savepoint_rollback(sid)
             # transaction.leave_transaction_management()
         return output
+
+    def content(self):
+        if self._content is None:
+            self._content = self._get_content()
+        return self._content
+
+    def assets(self):
+        if self._assets is None:
+            self.content()
+        return self._assets
 
     def get_absolute_url(self):
         return reverse('patternatlus:pattern', kwargs={
@@ -57,7 +82,7 @@ class Pattern(object):
         })
 
     def __repr__(self):
-        return '<{mod}.{cls}: app_label={app}, name={callable}'.format(
+        return '<{mod}.{cls}: app_label={app}, name={callable}>'.format(
             mod=self.__module__, cls=self.__class__.__name__,
             app=self.module, callable=self.callable_name)
 
@@ -136,6 +161,23 @@ class Atlus(object):
         return sorted(frozenset(pattern for label, pattern
                                 in self.app_labels_and_pattern_names()))
 
+    def assets(self):
+        _assets = {
+            'top': [],
+            'bottom': [],
+        }
+        # this is rubbish.
+        for pattern in self:
+            individual_assets = pattern.assets()
+            # only loop over the keys we're going to provide to the output.
+            for position in _assets.keys():
+                values = individual_assets.get(position, ())
+                # de-dup and add.
+                for value in values:
+                    if value not in _assets[position]:
+                        _assets[position].append(fix_raw_asset(value))
+        return _assets
+
     def __iter__(self):
         return iter(self.discovered)
 
@@ -179,16 +221,31 @@ class Atlus(object):
 
     def __repr__(self):
         patts = (repr(pattern) for pattern in self.discovered)
-        return '<{mod}.{cls} contains: {patterns}'.format(
+        return '<{mod}.{cls} containing {count} patterns: {patterns}'.format(
             mod=self.__module__, cls=self.__class__.__name__,
-            patterns=', '.join(patts))
+            patterns=', '.join(patts), count=len(self))
 
     def __add__(self, other):
         return self.__class__(presets=chain(self.discovered, other.discovered),
                               request=self.request or other.request)
 
 
-def is_pattern(func):
-    if not hasattr(func, 'is_pattern'):
-        func.is_pattern = True
+def is_pattern(func=None, assets=None):
+    def __is_pattern(func, assets):
+        if not hasattr(func, 'is_pattern'):
+            func.is_pattern = True
+        if not hasattr(func, 'assets'):
+            func.assets = assets or {}
+        return func
+
+    if func:
+        return __is_pattern(func, assets=assets)
+    else:
+        return functools.partial(__is_pattern, assets=assets)
+
+    # import pdb; pdb.set_trace()
+    # if not hasattr(func, 'is_pattern'):
+    #     func.is_pattern = True
+    # if not hasattr(func, 'assets'):
+    #     func.assets = None or {}
     return func

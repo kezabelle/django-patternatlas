@@ -24,6 +24,7 @@ d(
         "django.contrib.admin",
         "debug_toolbar",
         "test_app",
+        "another_test_app",
         "patternatlus",
     ],
     MIDDLEWARE_CLASSES=[

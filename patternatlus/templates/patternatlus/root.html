@@ -1,6 +1,15 @@
 {% extends "patternatlus/base.html" %}
+{% load patternatlus %}
 
 {% block title %}Pattern Atlus, a styleguide.{% endblock %}
+
+{% block topassets %}
+{{ atlus_assets.top|join:' ' }}
+{% endblock %}
+
+{% block bottomassets %}
+{{ atlus_assets.bottom|join:' ' }}
+{% endblock %}
 
 {% block content %}
 <h1>Pattern Atlus</h1>
@@ -20,3 +29,4 @@
     {% include "patternatlus/_pattern.html" with pattern=x %}
 {% endfor %}
 {% endblock %}
+

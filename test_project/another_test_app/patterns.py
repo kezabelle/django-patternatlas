@@ -1,0 +1,9 @@
+from django.template.context import RequestContext
+from django.template.loader import render_to_string
+from patternatlus import is_pattern
+
+
+@is_pattern
+def example_header(request):
+    return render_to_string('example_header.html', {},
+                            context_instance=RequestContext(request))

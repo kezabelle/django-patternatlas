@@ -6,11 +6,14 @@
         <title>{% block title %}{% endblock title %}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block topassets %}{% endblock %}
     </head>
     <body class="" id="">
         {# seriously if your css clashes with this class you're crazy #}
         <div class="django-patternatlus-container">
         {% block content %}{% endblock content %}
         </div>
+
+        {% block bottomassets %}{% endblock %}
     </body>
 </html>

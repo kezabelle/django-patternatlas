@@ -5,7 +5,8 @@ from django.template.loader import render_to_string
 from patternatlus import is_pattern
 
 
-@is_pattern
+@is_pattern(assets={'top': ['css/example_base.css',
+                            'css/example_table.css']})
 def example_table(request):
     """
     How tables should be rendered wherever they're used.
@@ -22,7 +23,8 @@ def example_table(request):
                             context_instance=RequestContext(request))
 
 
-@is_pattern
+@is_pattern(assets={'top': ['css/example_base.css',
+                            'css/example_breadcrumbs.css']})
 def example_breadcrumbs(request):
     users = [User(
         username='username{0}'.format(randint(1, 1000)),
@@ -36,9 +38,12 @@ def example_breadcrumbs(request):
                             context_instance=RequestContext(request))
 
 
-
 class ExamplePagination(object):
     is_pattern = True
+
+    assets = {
+        'top': ('css/example_base.css', 'css/example_pagination.css'),
+    }
 
     def __init__(self, request):
         self.request = request
