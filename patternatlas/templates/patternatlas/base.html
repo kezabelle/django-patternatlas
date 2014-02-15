@@ -7,17 +7,17 @@
         <title>{% block title %}{% endblock title %}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="{% static 'patternatlus/css/base.css' %}{% if debug %}?u={% now 'u' %}{% endif %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patternatlas/css/base.css' %}{% if debug %}?u={% now 'u' %}{% endif %}">
         {% block topassets %}{% endblock %}
     </head>
     <body class="" id="">
         {# seriously if your css clashes with these classes you're crazy #}
-        <div class="django-patternatlus-container">
-            <div class="django-patternatlus-header">
-            <h1 class="django-patternatlus-title"><a href="{% url 'patternatlus:index' %}">Pattern Atlus</a></h1>
+        <div class="django-patternatlas-container">
+            <div class="django-patternatlas-header">
+            <h1 class="django-patternatlas-title"><a href="{% url 'patternatlas:index' %}">Pattern atlas</a></h1>
             {% block header %}{% endblock %}
             </div>
-            <div class="django-patternatlus-content">
+            <div class="django-patternatlas-content">
             {% block content %}{% endblock content %}
             </div>
         </div>

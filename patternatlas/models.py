@@ -14,7 +14,7 @@ try:
     from importlib import import_module
 except ImportError:
     from django.utils.importlib import import_module
-from .templatetags.patternatlus import fix_raw_asset
+from .templatetags.patternatlas import fix_raw_asset
 
 
 @python_2_unicode_compatible
@@ -70,13 +70,13 @@ class Pattern(object):
         return self._assets
 
     def get_absolute_url(self):
-        return reverse('patternatlus:pattern', kwargs={
+        return reverse('patternatlas:pattern', kwargs={
             'app_label': self.module,
             'pattern': self.callable_name,
         })
 
     def get_parent_url(self):
-        return reverse('patternatlus:app', kwargs={
+        return reverse('patternatlas:app', kwargs={
             'app_label': self.module,
         })
 
@@ -100,7 +100,7 @@ class Pattern(object):
 
 
 @python_2_unicode_compatible
-class Atlus(object):
+class Atlas(object):
     __slots__ = ('discovered', 'request',)
 
     def __init__(self, presets=None, request=None):
@@ -216,7 +216,7 @@ class Atlus(object):
     __bool__ = __nonzero__
 
     def __str__(self):
-        return 'Atlus containing {count} patterns'.format(count=len(self))
+        return 'atlas containing {count} patterns'.format(count=len(self))
 
     def __repr__(self):
         patts = (repr(pattern) for pattern in self.discovered)

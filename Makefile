@@ -3,7 +3,7 @@
 all: help
 
 help:
-	@echo "django-patternatlus version 0.1.0"
+	@echo "django-patternatlas version 0.1.0"
 	@echo
 	@echo "clean-build - remove build artifacts"
 	@echo "clean-pyc - remove Python file artifacts"
@@ -41,10 +41,10 @@ test-all: requirements
 
 test-project:
 	pip install -r test_project/requirements.txt
-	python test_project/run.py
+	python test_project
 
 shell:
-	python test_project/run.py shell
+	python test_project shell
 
 requirements:
 	rm -f 'requirements.all.txt'

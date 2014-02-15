@@ -1,8 +1,8 @@
 =============
-Pattern Atlus
+Pattern Atlas
 =============
 
-``django-patternatlus`` is a re-usable application for collecting components
+``django-patternatlas`` is a re-usable application for collecting components
 (templates, CSS, javascript etc) into a single living style guide.
 
 It reads a ``patterns`` module for each of the ``INSTALLED_APPS`` and
@@ -17,7 +17,7 @@ Writing pattern callables
 An example pattern component::
 
     from django.template.loader import render_to_string
-    from patternatlus import is_pattern
+    from patternatlas import is_pattern
 
     @is_pattern
     def example_header(request):
@@ -58,17 +58,17 @@ the latter is typically for javascript usage.
 Installation
 ------------
 
-add ``patternatlus`` to your settings::
+add ``patternatlas`` to your settings::
 
-    INSTALLED_APPS += ('patternatlus',)
+    INSTALLED_APPS += ('patternatlas',)
 
 Add the app to your main ``urls.py``::
 
     from django.conf.urls import include, patterns
-    import patternatlus
+    import patternatlas
 
     urlpatterns += ('',
-        url(r'^styleguide/', include(patternatlus.urlconf)),
+        url(r'^styleguide/', include(patternatlas.urlconf)),
     )
 
 Write yourself some patterns, and visit ``/styleguide/`` in your browser.

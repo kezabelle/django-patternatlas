@@ -9,14 +9,14 @@ body {
   height: 100%;
 }
 
-.django-patternatlus-container {
+.django-patternatlas-container {
     background-color: #F1F1F1;
     min-height: 100%;
     height: auto !important;
     height: 100%;
 }
 
-.django-patternatlus-header {
+.django-patternatlas-header {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
@@ -35,26 +35,26 @@ body {
     border-bottom: 1px solid #404040;
 }
 
-.django-patternatlus-title {
+.django-patternatlas-title {
     color: #EFEFEF;
     margin: 0 auto;
     font-weight: normal;
     width: 90%;
 }
 
-.django-patternatlus-title a,
-.django-patternatlus-title a:hover,
-.django-patternatlus-title a:focus {
+.django-patternatlas-title a,
+.django-patternatlas-title a:hover,
+.django-patternatlas-title a:focus {
     color: #EFEFEF;
     text-decoration: none;
 }
 
-.django-patternatlus-content {
+.django-patternatlas-content {
     width: 90%;
     margin: 0 auto;
 }
 
-.django-patternatlus-pattern {
+.django-patternatlas-pattern {
     background-color: white;
     padding: 1em;
     border-top: 1px solid #DEDEDE;

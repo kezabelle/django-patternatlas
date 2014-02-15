@@ -25,7 +25,7 @@ d(
         "debug_toolbar",
         "test_app",
         "another_test_app",
-        "patternatlus",
+        "patternatlas",
     ],
     MIDDLEWARE_CLASSES=[
         "django.middleware.common.CommonMiddleware",
@@ -73,12 +73,12 @@ d(
 
 from django.conf.urls import include
 import debug_toolbar
-import patternatlus
+import patternatlas
 
 d.urlpatterns += d.patterns('',
                             d.url(r'^debug_toolbar/',
                                   include(debug_toolbar.urls)),
-                            d.url(r'^', include(patternatlus.urlconf)))
+                            d.url(r'^', include(patternatlas.urlconf)))
 
 
 if __name__ == "__main__":

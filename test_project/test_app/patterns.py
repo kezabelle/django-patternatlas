@@ -2,7 +2,7 @@ from random import randint
 from django.contrib.auth.models import User
 from django.template.context import RequestContext
 from django.template.loader import render_to_string
-from patternatlus import is_pattern
+from patternatlas import is_pattern
 
 
 @is_pattern(assets={'top': ['css/example_base.css',

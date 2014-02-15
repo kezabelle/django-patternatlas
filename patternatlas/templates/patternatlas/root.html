@@ -1,0 +1,31 @@
+{% extends "patternatlas/base.html" %}
+{% load patternatlas %}
+
+{% block title %}Pattern atlas, a styleguide.{% endblock %}
+
+{% block topassets %}
+{{ atlas_assets.top|join:' ' }}
+{% endblock %}
+
+{% block bottomassets %}
+{{ atlas_assets.bottom|join:' ' }}
+{% endblock %}
+
+{% block content %}
+<ol class="django-patternatlas-applist">
+{% for x in atlas.app_labels %}
+<li class="django-patternatlas-applist-item">
+    <a href="#{{ x|slugify }}">{{ x }}</a>
+</li>
+{% endfor %}
+</ol>
+
+{% for x in atlas %}
+    {% ifchanged x.module %}
+    <a name="{{ x.module|slugify }}"></a>
+    <h2>{{ x.module }}</h2>
+    {% endifchanged %}
+    {% include "patternatlas/_pattern.html" with pattern=x %}
+{% endfor %}
+{% endblock %}
+

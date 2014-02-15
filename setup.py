@@ -41,7 +41,7 @@ def make_readme(root_path):
 LONG_DESCRIPTION = "\r\n\r\n----\r\n\r\n".join(make_readme(HERE))
 
 setup(
-    name="django-patternatlus",
+    name="django-patternatlas",
     version="0.1.0",
     packages=find_packages(),
     author="Keryn Knight",

@@ -1,9 +1,0 @@
-{% extends "patternatlus/app_label.html" %}
-
-{% block title %}Pattern for ??&mdash;{{ block.super }}{% endblock %}
-
-{% block content %}
-{% for x in pattern_atlus %}
-{% include "patternatlus/_pattern.html" with pattern=x %}
-{% endfor %}
-{% endblock %}

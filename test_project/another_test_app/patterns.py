@@ -1,6 +1,6 @@
 from django.template.context import RequestContext
 from django.template.loader import render_to_string
-from patternatlus import is_pattern
+from patternatlas import is_pattern
 
 
 @is_pattern

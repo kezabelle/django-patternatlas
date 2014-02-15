@@ -1,0 +1,9 @@
+{% extends "patternatlas/app_label.html" %}
+
+{% block title %}Pattern for ??&mdash;{{ block.super }}{% endblock %}
+
+{% block content %}
+{% for x in pattern_atlas %}
+{% include "patternatlas/_pattern.html" with pattern=x %}
+{% endfor %}
+{% endblock %}
