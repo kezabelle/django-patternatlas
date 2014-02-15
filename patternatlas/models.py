@@ -173,8 +173,9 @@ class Atlas(object):
                 values = individual_assets.get(position, ())
                 # de-dup and add.
                 for value in values:
-                    if value not in _assets[position]:
-                        _assets[position].append(fix_raw_asset(value))
+                    fixed_value = fix_raw_asset(value)
+                    if fixed_value not in _assets[position]:
+                        _assets[position].append(fixed_value)
         return _assets
 
     def __iter__(self):
