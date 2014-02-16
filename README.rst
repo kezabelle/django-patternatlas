@@ -9,7 +9,7 @@ It reads a ``patterns`` module for each of the ``INSTALLED_APPS`` and
 collects callables with the attribute ``is_pattern``, and then assembles
 them into a browsable webapp.
 
-Currently at version: 0.2.0
+Currently at version: 0.2.1
 
 Writing pattern callables
 -------------------------
