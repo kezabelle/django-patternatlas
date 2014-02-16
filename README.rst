@@ -55,6 +55,30 @@ There are two keys available for assets: ``top`` and ``bottom``, the former
 is used for CSS and javascript etc that needs to be loaded up-front, while
 the latter is typically for javascript usage.
 
+Callables in callables
+^^^^^^^^^^^^^^^^^^^^^^
+
+If a given pattern returns a **callable**, rather than a string of rendered
+output, that callable will itself be called. This will occur until a callable
+chain stops returning new callables. A simple example::
+
+    def callable1(request):
+        return callable2
+
+    def callable2(request):
+        return ''
+
+    @is_pattern
+    def entry_callable(request):
+        return callable1
+
+In the above example, the contents of ``callable2`` are ultimately what is
+rendered in the browser, though the pattern ``entry_callable`` is what is
+auto-discovered, and what declares any assets. This allows for easily wrapping of existing callables to be exposed as patterns,
+while keeping the dependencies separate.
+
+Each callable in the chain must accept ``request`` as a keyword argument.
+
 Installation
 ------------
 
