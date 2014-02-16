@@ -17,14 +17,18 @@ try:
     from importlib import import_module
 except ImportError:
     from django.utils.importlib import import_module
+try:
+    from django.utils.text import slugify
+except ImportError:
+    from django.template.defaultfilters import slugify
 from .templatetags.patternatlas import fix_raw_asset
 
 
 @python_2_unicode_compatible
 class Pattern(object):
     __slots__ = ('callable', 'callable_name', '_description', 'is_pattern',
-                 'module', 'name', 'request', '_assets', '_content',
-                 '_module_description')
+                 'module', 'module_name', 'name', 'request', '_assets',
+                 '_content', '_module_description')
 
     def __init__(self, callable_pattern, request=None):
         self.is_pattern = True
@@ -33,9 +37,10 @@ class Pattern(object):
         # weird hack from Django
         patterns_module = sys.modules[callable_pattern.__module__]
         self.module = patterns_module.__name__.split('.')[-2]
+        self.module_name = get_verbose_name(self.module).replace('_', ' ')
         self._module_description = self._fix_docstring(patterns_module.__doc__)
-        self.callable_name = self.callable.__name__
-        self.name = get_verbose_name(self.callable_name).replace('_', ' ')
+        self.callable_name = slugify(force_text(get_verbose_name(self.callable.__name__)))
+        self.name = get_verbose_name(self.callable.__name__).replace('_', ' ')
         self.request = request
         self._content = None
         self._assets = None
