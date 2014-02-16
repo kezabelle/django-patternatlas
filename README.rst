@@ -117,3 +117,21 @@ required configuration variables, and do::
     python manage.py staticsitegen
 
 .. _django_medusa: https://github.com/mtigas/django-medusa
+
+Testing
+-------
+
+Unit tests aren't in place yet -- the application API is still being fleshed
+out, but they'll come *soon*.
+
+Meanwhile, there is an example styleguide project which shows off much of
+the provided functionality in ``test_project``, to use it, do the following::
+
+    make test-project
+
+which is equivalent to the following::
+
+    pip install -r test_project/requirements.txt
+    python test_project
+
+
