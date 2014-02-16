@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import Http404
 from .models import Atlas
 
 
@@ -14,6 +15,8 @@ def root(request):
 def app(request, app_label):
     master_atlas = Atlas(request=request)
     app_atlas = master_atlas.only_app(app_label)
+    if len(app_atlas) == 0:
+        raise Http404('Atlas contained no patterns')
     context = {
         'atlas': master_atlas,
         'app_atlas': app_atlas,
@@ -26,10 +29,15 @@ def app(request, app_label):
 
 def pattern(request, app_label, pattern):
     master_atlas = Atlas(request=request)
-    pattern_atlas = master_atlas.only_app_pattern(app_label, pattern)
+    app_atlas = master_atlas.only_app(app_label)
+    if len(app_atlas) == 0:
+        raise Http404('Atlas contained no patterns')
+    pattern_atlas = app_atlas.only_app_pattern(app_label, pattern)
+    if len(pattern_atlas) == 0:
+        raise Http404('Pattern not found in requested atlas')
     context = {
         'atlas': master_atlas,
-        'app_atlas': master_atlas.only_app(app_label),
+        'app_atlas': app_atlas,
         'pattern_atlas': pattern_atlas,
         'atlas_assets': pattern_atlas.assets(),
     }
