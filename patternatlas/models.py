@@ -280,6 +280,12 @@ class Atlas(object):
     description = __doc__
     module_description = __doc__
 
+    def __getitem__(self, value):
+        if value.isdigit():
+            return self.discovered[int(value)]
+        else:
+            return super(Atlas, self).__getitem__(value)
+
 
 def is_pattern(func=None, assets=None):
     def __is_pattern(func, assets):

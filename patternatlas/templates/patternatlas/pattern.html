@@ -5,9 +5,9 @@
     {{ block.super }}
     {% url 'patternatlas:pattern' kwargs.app_label kwargs.pattern_name as CRUMB_URL %}
     {% if request.path == CRUMB_URL %}
-    <li class="active">{{ kwargs.pattern_name }}</li>
+    <li class="active">{{ pattern_atlas.0.name }}</li>
     {% else %}
-    <li><a href="{{ CRUMB_URL }}">{{ kwargs.pattern_name }}</a></li>
+    <li><a href="{{ CRUMB_URL }}">{{ pattern_atlas.0.name }}</a></li>
     {% endif %}
 {% endblock %}
 
