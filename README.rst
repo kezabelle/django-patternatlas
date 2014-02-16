@@ -118,6 +118,19 @@ required configuration variables, and do::
 
 .. _django_medusa: https://github.com/mtigas/django-medusa
 
+Using as an API
+---------------
+
+There is a preliminary JSON API available, provided through `django-nap`_,
+it is wired up in the test project at `/api/`.
+
+As `django-nap`_ supports `autodiscovery`_, in an ordinary Django project
+where you don't want the API, just don't import anything from ``publishers`` or
+``serialiser``.
+
+.. _django-nap: https://github.com/funkybob/django-nap
+.. _autodiscovery: http://django-nap.readthedocs.org/en/latest/api.html#auto-discover
+
 Testing
 -------
 

@@ -281,9 +281,9 @@ class Atlas(object):
     module_description = __doc__
 
     def __getitem__(self, value):
-        if value.isdigit():
+        try:
             return self.discovered[int(value)]
-        else:
+        except TypeError:
             return super(Atlas, self).__getitem__(value)
 
 
