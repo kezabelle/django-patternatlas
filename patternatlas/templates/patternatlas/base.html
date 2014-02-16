@@ -17,6 +17,11 @@
             <h1 class="django-patternatlas-title"><a href="{% url 'patternatlas:index' %}">Pattern atlas</a></h1>
             {% block header %}{% endblock %}
             </div>
+
+            <div class="django-patternatlas-readme">
+            {% block docs %}{% endblock %}
+            </div>
+
             <div class="django-patternatlas-content">
             {% block content %}{% endblock content %}
             </div>
