@@ -11,6 +11,15 @@
 {{ atlas_assets.bottom|join:' ' }}
 {% endblock %}
 
+{% block docs %}
+{% include "patternatlas/_root_readme.html" %}
+{% if 'textonly' in request.GET %}
+    <a href="{% url 'patternatlas:index' %}" class="django-patternatlas-button">Back to pattern list</a>
+{% else %}
+    <a href="{% url 'patternatlas:index' %}?textonly" class="django-patternatlas-button">Pattern descriptions</a>
+{% endif %}
+{% endblock %}
+
 {% block breadcrumbs %}
     {% url 'patternatlas:index' as CRUMB_URL %}
     {% if request.path == CRUMB_URL %}
@@ -21,21 +30,25 @@
 {% endblock %}
 
 {% block content %}
-<dl class="django-patternatlas-toctree">
-{% for app, pattern in atlas.app_labels_and_pattern_names %}
-    {% ifchanged app %}
-    <dt><a href="#{{ app|slugify }}">{{ app }}</a></dt>
-    {% endifchanged %}
-    <dd>{{ pattern }}</dd>
-{% endfor %}
-</dl>
-
-{% for x in atlas %}
-    {% ifchanged x.module %}
-    <a name="{{ x.module|slugify }}"></a>
-    <h2>{{ x.module }}</h2>
-    {% endifchanged %}
-    {% include "patternatlas/_pattern.html" with pattern=x %}
-{% endfor %}
+{% if 'textonly' not in request.GET %}
+    {% for x in atlas %}
+        {% include "patternatlas/_pattern_complete.html" with pattern=x %}
+    {% endfor %}
+{% else %}
+    <dl class="django-patternatlas-toctree">
+    {% for x in atlas %}
+        {% ifchanged x.module_name %}
+        <dt>
+        <a href="{{ x.get_parent_url }}">{{ x.module_name }}</a>
+        {{ x.module_description }}
+        </dt>
+        {% endifchanged %}
+        <dd>
+        <a href="{{ x.get_absolute_url }}">{{ x.name }}</a>
+        {{ x.description }}
+        </dd>
+    {% endfor %}
+    </dl>
+{% endif %}
 {% endblock %}
 

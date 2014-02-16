@@ -1,23 +1,46 @@
-.django-patternatlas-breadcrumbs > ol {
-  padding: 8px 15px;
-  margin-bottom: 20px;
-  list-style: none;
-  border-radius: 4px;
+.django-patternatlas-breadcrumbs {
+  font-family: 'Lucida Grande', 'DejaVu Sans', 'Bitstream Vera Sans', Verdana, Arial, sans-serif;
+  background: white url(../../admin/img/nav-bg-reverse.gif) 0 -10px repeat-x;
+  padding: 2px 8px 3px 8px;
+  font-size: 11px;
+  color: #999;
+  border-top: 1px solid white;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
 }
-.django-patternatlas-breadcrumbs > ol > li {
+
+.django-patternatlas-pattern-breadcrumbs {
+  font-family: 'Lucida Grande', 'DejaVu Sans', 'Bitstream Vera Sans', Verdana, Arial, sans-serif;
+  font-size: 11px;
+  color: #999;
+  text-align: left;
+}
+
+.django-patternatlas-breadcrumbs > ol,
+.django-patternatlas-pattern-breadcrumbs > ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 11px;
+}
+.django-patternatlas-breadcrumbs > ol > li,
+.django-patternatlas-pattern-breadcrumbs > ol > li  {
   display: inline-block;
 }
-.django-patternatlas-breadcrumbs > ol > li + li:before {
-  content: "/\00a0";
-  padding: 0 5px;
+.django-patternatlas-breadcrumbs > ol > li + li:before,
+.django-patternatlas-pattern-breadcrumbs > ol > li + li:before {
+  content: "\203A\00a0";
+  padding: 0 0.2em;
   color: #cccccc;
 }
 
-.django-patternatlas-breadcrumbs a {
-  color: #428bca;
+.django-patternatlas-breadcrumbs a,
+.django-patternatlas-pattern-breadcrumbs a {
+  color: #5b80b2;
   text-decoration: none;
 }
 
-.django-patternatlas-breadcrumbs > ol > .active {
-  color: #999999;
+.django-patternatlas-breadcrumbs > ol > .active,
+.django-patternatlas-pattern-breadcrumbs > ol > .active {
+  color: #999;
 }

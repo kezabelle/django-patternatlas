@@ -4,6 +4,12 @@
 
 {% block docs %}
 {{ app_atlas.description }}
+<a class="django-patternatlas-button" href="{% url 'patternatlas:index' %}">Back to home</a>
+{% if 'textonly' in request.GET %}
+<a class="django-patternatlas-button" href="{% url 'patternatlas:app' kwargs.app_label %}">Back to pattern list</a>
+{% else %}
+<a class="django-patternatlas-button" href="{% url 'patternatlas:app' kwargs.app_label %}?textonly">Pattern descriptions</a>
+{% endif %}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -18,15 +24,18 @@
 
 
 {% block content %}
-<dl class="django-patternatlas-patternlist">
-    <dt>appname</dt>
+{% if 'textonly' not in request.GET %}
     {% for x in app_atlas %}
-    <dd class="django-patternatlas-patternlist-item">
-       <a href="{{ x.get_absolute_url }}">{{ x.name }}</a>
-       {% if x.description %}
-       <p>{{ x.description }}</p>
-       {% endif %}
-    </dd>
+        {% include "patternatlas/_pattern_complete.html" with pattern=x %}
     {% endfor %}
-</dl>
+{% else %}
+  <dl class="django-patternatlas-toctree">
+  {% for x in app_atlas %}
+      <dt>
+      <a href="{{ x.get_absolute_url }}">{{ x.name }}</a>
+      {{ x.description }}
+      </dt>
+  {% endfor %}
+  </dl>
+{% endif %}
 {% endblock %}

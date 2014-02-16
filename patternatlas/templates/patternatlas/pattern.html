@@ -11,6 +11,15 @@
     {% endif %}
 {% endblock %}
 
+{% block docs %}
+{{ app_atlas.description }}
+{% for x in pattern_atlas %}
+<hr>
+{% if x.description %}{{ x.description }}{% endif %}
+{% endfor %}
+<a class="django-patternatlas-button" href="{% url 'patternatlas:app' kwargs.app_label %}">Back</a>
+{% endblock %}
+
 {% block content %}
 {% for x in pattern_atlas %}
 {% include "patternatlas/_pattern.html" with pattern=x %}
