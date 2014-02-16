@@ -22,6 +22,7 @@ d(
         "django.contrib.staticfiles",
         "django.contrib.messages",
         "django.contrib.admin",
+        "django.contrib.sitemaps",
         "debug_toolbar",
         "test_app",
         "another_test_app",
@@ -78,9 +79,15 @@ from django.conf.urls import include
 import debug_toolbar
 import patternatlas
 
+sitemaps = {
+    'atlas': patternatlas.PatternSitemap,
+}
 d.urlpatterns += d.patterns('',
                             d.url(r'^debug_toolbar/',
                                   include(debug_toolbar.urls)),
+                            d.url(r'^sitemap\.xml$',
+                                  'django.contrib.sitemaps.views.sitemap',
+                                  {'sitemaps': sitemaps}),
                             d.url(r'^', include(patternatlas.urlconf)))
 
 
