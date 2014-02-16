@@ -1,6 +1,15 @@
 {% extends "patternatlas/app_label.html" %}
-
 {% block title %}Pattern for ??&mdash;{{ block.super }}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% url 'patternatlas:pattern' kwargs.app_label kwargs.pattern_name as CRUMB_URL %}
+    {% if request.path == CRUMB_URL %}
+    <li class="active">{{ kwargs.pattern_name }}</li>
+    {% else %}
+    <li><a href="{{ CRUMB_URL }}">{{ kwargs.pattern_name }}</a></li>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
 {% for x in pattern_atlas %}

@@ -1,0 +1,23 @@
+.django-patternatlas-breadcrumbs > ol {
+  padding: 8px 15px;
+  margin-bottom: 20px;
+  list-style: none;
+  border-radius: 4px;
+}
+.django-patternatlas-breadcrumbs > ol > li {
+  display: inline-block;
+}
+.django-patternatlas-breadcrumbs > ol > li + li:before {
+  content: "/\00a0";
+  padding: 0 5px;
+  color: #cccccc;
+}
+
+.django-patternatlas-breadcrumbs a {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.django-patternatlas-breadcrumbs > ol > .active {
+  color: #999999;
+}

@@ -8,6 +8,10 @@ def root(request):
     context = {
         'atlas': atlas,
         'atlas_assets': atlas.assets(),
+        'kwargs': {
+            'app_label': None,
+            'pattern_name': None,
+        },
     }
     return render(request, 'patternatlas/root.html', context)
 
@@ -21,6 +25,10 @@ def app(request, app_label):
         'atlas': master_atlas,
         'app_atlas': app_atlas,
         'atlas_assets': app_atlas.assets(),
+        'kwargs': {
+            'app_label': app_label,
+            'pattern_name': None,
+        },
     }
     templates = ('patternatlas/{0}/app_label.html'.format(app_label),
                  'patternatlas/app_label.html')
@@ -40,6 +48,10 @@ def pattern(request, app_label, pattern):
         'app_atlas': app_atlas,
         'pattern_atlas': pattern_atlas,
         'atlas_assets': pattern_atlas.assets(),
+        'kwargs': {
+            'app_label': app_label,
+            'pattern_name': pattern,
+        },
     }
     templates = ('patternatlas/{0}/{1}/pattern.html'.format(app_label,
                                                             pattern),

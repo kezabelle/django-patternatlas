@@ -6,6 +6,17 @@
 {{ app_atlas.description }}
 {% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% url 'patternatlas:app' kwargs.app_label as CRUMB_URL %}
+    {% if request.path == CRUMB_URL %}
+    <li class="active">{{ kwargs.app_label }}</li>
+    {% else %}
+    <li><a href="{{ CRUMB_URL }}">{{ kwargs.app_label }}</a></li>
+    {% endif %}
+{% endblock %}
+
+
 {% block content %}
 <dl class="django-patternatlas-patternlist">
     <dt>appname</dt>

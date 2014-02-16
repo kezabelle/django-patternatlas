@@ -1,5 +1,5 @@
 {% extends "patternatlas/base.html" %}
-{% load patternatlas %}
+{% load i18n patternatlas %}
 
 {% block title %}Pattern atlas, a styleguide.{% endblock %}
 
@@ -11,14 +11,24 @@
 {{ atlas_assets.bottom|join:' ' }}
 {% endblock %}
 
+{% block breadcrumbs %}
+    {% url 'patternatlas:index' as CRUMB_URL %}
+    {% if request.path == CRUMB_URL %}
+    <li class="active">{% trans "Home" %}</li>
+    {% else %}
+    <li><a href="{{ CRUMB_URL }}">{% trans "Home" %}</a></li>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
-<ol class="django-patternatlas-applist">
-{% for x in atlas.app_labels %}
-<li class="django-patternatlas-applist-item">
-    <a href="#{{ x|slugify }}">{{ x }}</a>
-</li>
+<dl class="django-patternatlas-toctree">
+{% for app, pattern in atlas.app_labels_and_pattern_names %}
+    {% ifchanged app %}
+    <dt><a href="#{{ app|slugify }}">{{ app }}</a></dt>
+    {% endifchanged %}
+    <dd>{{ pattern }}</dd>
 {% endfor %}
-</ol>
+</dl>
 
 {% for x in atlas %}
     {% ifchanged x.module %}
