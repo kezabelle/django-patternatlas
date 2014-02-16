@@ -131,6 +131,15 @@ where you don't want the API, just don't import anything from ``publishers`` or
 .. _django-nap: https://github.com/funkybob/django-nap
 .. _autodiscovery: http://django-nap.readthedocs.org/en/latest/api.html#auto-discover
 
+Publishing your patterns in sitemaps
+------------------------------------
+
+There is a ``PatternSitemap`` available in ``sitemaps``, which provides deep
+links to the individual pattern components, for use with
+`django.contrib.sitemaps`_
+
+.. _django.contrib.sitemaps: https://docs.djangoproject.com/en/dev/ref/contrib/sitemaps/
+
 Testing
 -------
 
