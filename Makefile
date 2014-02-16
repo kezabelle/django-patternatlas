@@ -33,17 +33,17 @@ clean-pyc:
 	find . -name '*.pyo' -exec rm -f {} \;
 	find . -name '*~' -exec rm -f {} \;
 
-test: requirements
+test: clean-pyc requirements
 	python -B -tt -W once setup.py test --failfast
 
-test-all: requirements
+test-all: clean-pyc requirements
 	tox
 
-test-project:
+test-project: clean-pyc
 	pip install -r test_project/requirements.txt
 	python test_project
 
-shell:
+shell: clean-pyc
 	python test_project shell
 
 requirements:
