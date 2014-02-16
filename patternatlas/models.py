@@ -2,7 +2,8 @@ import sys
 import functools
 from itertools import chain
 from collections import defaultdict
-from docutils.examples import html_parts
+from docutils.core import publish_parts
+from sphinx.util.docstrings import prepare_docstring
 try:
     from django.utils.text import camel_case_to_spaces as get_verbose_name
 except ImportError:  # pragma: no cover (Django < 1.7)
@@ -21,29 +22,29 @@ from .templatetags.patternatlas import fix_raw_asset
 
 @python_2_unicode_compatible
 class Pattern(object):
-    __slots__ = ('callable', 'callable_name', 'description', 'is_pattern',
+    __slots__ = ('callable', 'callable_name', '_description', 'is_pattern',
                  'module', 'name', 'request', '_assets', '_content',
-                 'module_description')
+                 '_module_description')
 
     def __init__(self, callable_pattern, request=None):
         self.is_pattern = True
         self.callable = callable_pattern
-        desc = callable_pattern.__doc__
-        if desc is not None:
-            desc = desc.strip()
-        self.description = desc
+        self._description = self._fix_docstring(callable_pattern.__doc__)
         # weird hack from Django
         patterns_module = sys.modules[callable_pattern.__module__]
         self.module = patterns_module.__name__.split('.')[-2]
-        mod_desc = patterns_module.__doc__
-        if mod_desc is not None:
-            mod_desc = mod_desc.strip()
-        self.module_description = mod_desc
+        self._module_description = self._fix_docstring(patterns_module.__doc__)
         self.callable_name = self.callable.__name__
         self.name = get_verbose_name(self.callable_name).replace('_', ' ')
         self.request = request
         self._content = None
         self._assets = None
+
+    def _fix_docstring(self, data):
+        if data is None:
+            return ''
+        else:
+            return "\n".join(prepare_docstring(data))
 
     def _get_content(self):
         transaction.enter_transaction_management()
@@ -96,7 +97,7 @@ class Pattern(object):
             app=self.module, callable=self.callable_name)
 
     def __str__(self):
-        desc = self.description or ''
+        desc = self._description or ''
         if len(desc) > 30:
             desc = '{0}... truncated'.format(self.description[:30])
         return 'Pattern "{name}" ({desc})'.format(name=self.name,
@@ -110,11 +111,14 @@ class Pattern(object):
 
     @property
     def __doc__(self):
-        return self.description
+        return to_rst(self._description)
 
     @property
     def __moduledoc__(self):
-        return self.module_description
+        return to_rst(self._module_description)
+
+    description = __doc__
+    module_description = __moduledoc__
 
 
 @python_2_unicode_compatible
@@ -122,11 +126,13 @@ class Atlas(object):
     __slots__ = ('discovered', 'request',)
 
     def __init__(self, presets=None, request=None):
+        self.request = request
         if presets is not None:
             presets = self.sort(list(presets))
-        self.request = request
         self.discovered = presets or []
-        self.discover()
+        # avoid re-collecting ...
+        if presets is None:
+            self.discover()
 
     def sort(self, discovered):
         unsorted = tuple(discovered)
@@ -134,9 +140,6 @@ class Atlas(object):
         return resorted
 
     def discover(self):
-        if self.discovered:
-            return self.discovered
-
         discovered = set()
         for app in settings.INSTALLED_APPS:
             module_path = '{0}.patterns'.format(app)
@@ -240,7 +243,7 @@ class Atlas(object):
 
     def __repr__(self):
         patts = (repr(pattern) for pattern in self.discovered)
-        return '<{mod}.{cls} containing {count} patterns: {patterns}'.format(
+        return '<{mod}.{cls} containing {count} patterns: {patterns}>'.format(
             mod=self.__module__, cls=self.__class__.__name__,
             patterns=', '.join(patts), count=len(self))
 
@@ -252,7 +255,7 @@ class Atlas(object):
     def __doc__(self):
         # output module's description if we're in an app only Atlas.
         if len(self.app_labels()) == 1:
-            doc = self.discovered[0].module_description or ''
+            return self.discovered[0].module_description or ''
         else:
             patts = (repr(pattern) for pattern in self.discovered)
             title = force_text(self)
@@ -265,21 +268,12 @@ class Atlas(object):
             {patterns}
             """.format(cls=title, sep='=' * len(title),
                        patterns="\n\n".join(patts))
-        return "\n".join(x.strip() for x in doc.splitlines())
+            prepared_doc = prepare_docstring(doc)
+            parsed_doc = to_rst("\n".join(prepared_doc))
+            return parsed_doc
 
-    def description(self):
-        docstring = self.__doc__
-        if len(docstring) < 1:
-            return ''
-        try:
-            parsed = html_parts(force_text(docstring))['body']
-        except:
-            if settings.DEBUG:
-                raise
-            parsed = docstring
-        return mark_safe(parsed)
-
-    module_description = description
+    description = __doc__
+    module_description = __doc__
 
 
 def is_pattern(func=None, assets=None):
@@ -294,10 +288,23 @@ def is_pattern(func=None, assets=None):
         return __is_pattern(func, assets=assets)
     else:
         return functools.partial(__is_pattern, assets=assets)
-
-    # import pdb; pdb.set_trace()
-    # if not hasattr(func, 'is_pattern'):
-    #     func.is_pattern = True
-    # if not hasattr(func, 'assets'):
-    #     func.assets = None or {}
     return func
+
+
+def to_rst(docstring):
+    if len(docstring) < 1:
+        return ''
+    try:
+        parsed = publish_parts(source=force_text(docstring),
+                               source_path=None, destination_path=None,
+                               writer_name='html',
+                               settings_overrides={
+                                   'input_encoding': 'unicode',
+                                   'doctitle_xform': True,
+                                   'initial_header_level': 1,
+                               })['body']
+    except:
+        if settings.DEBUG:
+            raise
+        parsed = docstring
+    return mark_safe(parsed)
