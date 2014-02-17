@@ -1,7 +1,13 @@
 {% extends "patternatlas/app_label.html" %}
+{% load static %}
 {% load url from future %}
 
 {% block title %}Pattern for {{ pattern_atlas.0.name }}&mdash;{{ block.super }}{% endblock %}
+
+{% block topassets %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'django_pygments/css/pygments_default.css' %}{% if debug %}?u={% now 'u' %}{% endif %}">
+{% endblock topassets %}
 
 {% block breadcrumbs %}
     {{ block.super }}

@@ -48,6 +48,7 @@ setup(
         'Django>=1.4.0'
         'docutils>=0.11',
         'Sphinx>=1.2.1',
+        'django-pygments>=0.1',
     ],
     author="Keryn Knight",
     author_email='python-package@kerynknight.com',

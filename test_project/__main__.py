@@ -27,6 +27,7 @@ d(
         "test_app",
         "another_test_app",
         "patternatlas",
+        "django_pygments",
         "django_medusa",
     ],
     MIDDLEWARE_CLASSES=[
