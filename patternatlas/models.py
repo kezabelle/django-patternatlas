@@ -12,7 +12,7 @@ from django.utils.encoding import python_2_unicode_compatible, force_text
 from django.db import transaction
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.utils.text import mark_safe
+from django.utils.safestring import mark_safe
 try:
     from importlib import import_module
 except ImportError:
