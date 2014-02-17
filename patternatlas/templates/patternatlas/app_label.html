@@ -1,7 +1,7 @@
 {% extends "patternatlas/root.html" %}
 {% load url from future %}
 
-{% block title %}Patterns for ??&mdash;{{ block.super }}{% endblock %}
+{% block title %}Patterns for {{ app_atlas.0.module_name }}&mdash;{{ block.super }}{% endblock %}
 
 {% block docs %}
 {{ app_atlas.description }}
