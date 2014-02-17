@@ -1,10 +1,7 @@
-from django.conf.urls import patterns, url, include
+from django.conf.urls import patterns, url
 from .views import root, app, pattern
-from .publishers import PatternPublisher
 
 urlpatterns = patterns('',
-                       url(regex=r'^api/',
-                           view=include(PatternPublisher.patterns())),
                        url(regex=r'^$',
                            view=root,
                            name="index"),

@@ -78,6 +78,7 @@ d(
 from django.conf.urls import include
 import debug_toolbar
 import patternatlas
+from patternatlas.publishers import PatternPublisher
 
 sitemaps = {
     'atlas': patternatlas.PatternSitemap,
@@ -88,6 +89,8 @@ d.urlpatterns += d.patterns('',
                             d.url(r'^sitemap\.xml$',
                                   'django.contrib.sitemaps.views.sitemap',
                                   {'sitemaps': sitemaps}),
+                            d.url(r'^api/',
+                                  include(PatternPublisher.patterns())),
                             d.url(r'^', include(patternatlas.urlconf)))
 
 
