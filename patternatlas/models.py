@@ -283,7 +283,7 @@ class Atlas(object):
     def __getitem__(self, value):
         try:
             return self.discovered[int(value)]
-        except TypeError:
+        except (TypeError, ValueError) as e:
             return super(Atlas, self).__getitem__(value)
 
 
