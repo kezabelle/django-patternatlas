@@ -44,6 +44,11 @@ setup(
     name="django-patternatlas",
     version="0.2.1",
     packages=find_packages(),
+    install_requires=[
+        'Django>=1.4.0'
+        'docutils>=0.11',
+        'Sphinx>=1.2.1',
+    ],
     author="Keryn Knight",
     author_email='python-package@kerynknight.com',
     description="",
