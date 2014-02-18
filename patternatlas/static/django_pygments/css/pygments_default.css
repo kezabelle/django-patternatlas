@@ -1,0 +1,60 @@
+.django-patternatlas-pattern-escaped pre  { background: #ffffff; white-space: pre-wrap; }
+.django-patternatlas-pattern-escaped pre .c { color: #888888 } /* Comment */
+.django-patternatlas-pattern-escaped pre .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.django-patternatlas-pattern-escaped pre .k { color: #008800; font-weight: bold } /* Keyword */
+.django-patternatlas-pattern-escaped pre .cm { color: #888888 } /* Comment.Multiline */
+.django-patternatlas-pattern-escaped pre .cp { color: #cc0000; font-weight: bold } /* Comment.Preproc */
+.django-patternatlas-pattern-escaped pre .c1 { color: #888888 } /* Comment.Single */
+.django-patternatlas-pattern-escaped pre .cs { color: #cc0000; font-weight: bold; background-color: #fff0f0 } /* Comment.Special */
+.django-patternatlas-pattern-escaped pre .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+.django-patternatlas-pattern-escaped pre .ge { font-style: italic } /* Generic.Emph */
+.django-patternatlas-pattern-escaped pre .gr { color: #aa0000 } /* Generic.Error */
+.django-patternatlas-pattern-escaped pre .gh { color: #333333 } /* Generic.Heading */
+.django-patternatlas-pattern-escaped pre .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+.django-patternatlas-pattern-escaped pre .go { color: #888888 } /* Generic.Output */
+.django-patternatlas-pattern-escaped pre .gp { color: #555555 } /* Generic.Prompt */
+.django-patternatlas-pattern-escaped pre .gs { font-weight: bold } /* Generic.Strong */
+.django-patternatlas-pattern-escaped pre .gu { color: #666666 } /* Generic.Subheading */
+.django-patternatlas-pattern-escaped pre .gt { color: #aa0000 } /* Generic.Traceback */
+.django-patternatlas-pattern-escaped pre .kc { color: #008800; font-weight: bold } /* Keyword.Constant */
+.django-patternatlas-pattern-escaped pre .kd { color: #008800; font-weight: bold } /* Keyword.Declaration */
+.django-patternatlas-pattern-escaped pre .kn { color: #008800; font-weight: bold } /* Keyword.Namespace */
+.django-patternatlas-pattern-escaped pre .kp { color: #008800 } /* Keyword.Pseudo */
+.django-patternatlas-pattern-escaped pre .kr { color: #008800; font-weight: bold } /* Keyword.Reserved */
+.django-patternatlas-pattern-escaped pre .kt { color: #888888; font-weight: bold } /* Keyword.Type */
+.django-patternatlas-pattern-escaped pre .m { color: #0000DD; font-weight: bold } /* Literal.Number */
+.django-patternatlas-pattern-escaped pre .s { color: #dd2200; background-color: #fff0f0 } /* Literal.String */
+.django-patternatlas-pattern-escaped pre .na { color: #336699 } /* Name.Attribute */
+.django-patternatlas-pattern-escaped pre .nb { color: #003388 } /* Name.Builtin */
+.django-patternatlas-pattern-escaped pre .nc { color: #bb0066; font-weight: bold } /* Name.Class */
+.django-patternatlas-pattern-escaped pre .no { color: #003366; font-weight: bold } /* Name.Constant */
+.django-patternatlas-pattern-escaped pre .nd { color: #555555 } /* Name.Decorator */
+.django-patternatlas-pattern-escaped pre .ne { color: #bb0066; font-weight: bold } /* Name.Exception */
+.django-patternatlas-pattern-escaped pre .nf { color: #0066bb; font-weight: bold } /* Name.Function */
+.django-patternatlas-pattern-escaped pre .nl { color: #336699; font-style: italic } /* Name.Label */
+.django-patternatlas-pattern-escaped pre .nn { color: #bb0066; font-weight: bold } /* Name.Namespace */
+.django-patternatlas-pattern-escaped pre .py { color: #336699; font-weight: bold } /* Name.Property */
+.django-patternatlas-pattern-escaped pre .nt { color: #bb0066; font-weight: bold } /* Name.Tag */
+.django-patternatlas-pattern-escaped pre .nv { color: #336699 } /* Name.Variable */
+.django-patternatlas-pattern-escaped pre .ow { color: #008800 } /* Operator.Word */
+.django-patternatlas-pattern-escaped pre .w { color: #bbbbbb } /* Text.Whitespace */
+.django-patternatlas-pattern-escaped pre .mf { color: #0000DD; font-weight: bold } /* Literal.Number.Float */
+.django-patternatlas-pattern-escaped pre .mh { color: #0000DD; font-weight: bold } /* Literal.Number.Hex */
+.django-patternatlas-pattern-escaped pre .mi { color: #0000DD; font-weight: bold } /* Literal.Number.Integer */
+.django-patternatlas-pattern-escaped pre .mo { color: #0000DD; font-weight: bold } /* Literal.Number.Oct */
+.django-patternatlas-pattern-escaped pre .sb { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Backtick */
+.django-patternatlas-pattern-escaped pre .sc { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Char */
+.django-patternatlas-pattern-escaped pre .sd { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Doc */
+.django-patternatlas-pattern-escaped pre .s2 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Double */
+.django-patternatlas-pattern-escaped pre .se { color: #0044dd; background-color: #fff0f0 } /* Literal.String.Escape */
+.django-patternatlas-pattern-escaped pre .sh { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Heredoc */
+.django-patternatlas-pattern-escaped pre .si { color: #3333bb; background-color: #fff0f0 } /* Literal.String.Interpol */
+.django-patternatlas-pattern-escaped pre .sx { color: #22bb22; background-color: #f0fff0 } /* Literal.String.Other */
+.django-patternatlas-pattern-escaped pre .sr { color: #008800; background-color: #fff0ff } /* Literal.String.Regex */
+.django-patternatlas-pattern-escaped pre .s1 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Single */
+.django-patternatlas-pattern-escaped pre .ss { color: #aa6600; background-color: #fff0f0 } /* Literal.String.Symbol */
+.django-patternatlas-pattern-escaped pre .bp { color: #003388 } /* Name.Builtin.Pseudo */
+.django-patternatlas-pattern-escaped pre .vc { color: #336699 } /* Name.Variable.Class */
+.django-patternatlas-pattern-escaped pre .vg { color: #dd7700 } /* Name.Variable.Global */
+.django-patternatlas-pattern-escaped pre .vi { color: #3333bb } /* Name.Variable.Instance */
+.django-patternatlas-pattern-escaped pre .il { color: #0000DD; font-weight: bold } /* Literal.Number.Integer.Long */
