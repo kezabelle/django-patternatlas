@@ -73,7 +73,8 @@ class Pattern(object):
             transaction.abort()
             # transaction.savepoint_rollback(sid)
             # transaction.leave_transaction_management()
-        return output
+
+        return "\n".join(x for x in output.splitlines() if x.strip())
 
     def content(self):
         if self._content is None:

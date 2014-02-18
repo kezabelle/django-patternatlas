@@ -1,10 +1,12 @@
 {% load pygmentify %}
 <section class="django-patternatlas-pattern">
-    {{ pattern.content }}
+    {{ pattern.content|safe }}
 
+    <div class="django-patternatlas-pattern-escaped">
     {% pygment %}
-    <pre lang="html" class="django-patternatlas-pattern-escaped">
+    <pre lang="html">
     {{ pattern.content }}
     </pre>
     {% endpygment %}
+    </div>
 </section>
