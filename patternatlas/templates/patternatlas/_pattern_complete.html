@@ -1,9 +1,20 @@
-<section class="django-patternatlas-pattern">
+<section id="p-{{ pattern.get_short_ref }}" class="django-patternatlas-pattern">
     <div class="django-patternatlas-pattern-breadcrumbs">
     <ol>
         <li><a href="{{ pattern.get_parent_url }}">{{ pattern.module_name }}</a></li>
         <li><a href="{{ pattern.get_absolute_url }}">{{ pattern.name }}</a></li>
     </ol>
+    </div>
+    <div class="django-patternatlas-links">
+        <ol>
+            <li>
+                <a href="{{ pattern.get_absolute_url }}">&para;</a>
+            </li>
+
+            <li>
+                <a href="#p-{{ pattern.get_short_ref }}">#</a>
+            </li>
+        </ol>
     </div>
     {{ pattern.description }}
     {{ pattern.content|safe }}

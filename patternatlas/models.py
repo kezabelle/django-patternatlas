@@ -1,5 +1,6 @@
 import sys
 import functools
+from hashlib import sha1
 from itertools import chain
 from collections import defaultdict
 from docutils.core import publish_parts
@@ -96,6 +97,14 @@ class Pattern(object):
         return reverse('patternatlas:app', kwargs={
             'app_label': self.module,
         })
+
+    def get_unique_ref(self):
+        return sha1(
+            force_text(' '.join((self.module, self.callable_name)))
+        ).hexdigest()
+
+    def get_short_ref(self):
+        return self.get_unique_ref()[:8]
 
     def __repr__(self):
         return '<{mod}.{cls}: app_label={app}, name={callable}>'.format(

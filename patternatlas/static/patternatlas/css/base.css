@@ -69,6 +69,10 @@ body {
     border-top: 1px solid #eee;
 }
 
+.django-patternatlas-pattern:target {
+    background: #FFC;
+}
+
 .django-patternatlas-toctree > dt {
     border-top: 1px solid #EEE;
     padding-top: 1em;
