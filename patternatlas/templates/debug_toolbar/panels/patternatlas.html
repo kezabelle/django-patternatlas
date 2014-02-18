@@ -1,0 +1,16 @@
+<h4>Apps</h4>
+<ol>
+{% for pattern in patterns %}
+    {% ifchanged pattern.module %}<li><a class="remoteCall toggleTemplate" href="{{ pattern.get_parent_url }}">{{ pattern.module }}</a></li>{% endifchanged %}
+{% endfor %}
+</ol>
+
+<h4>Patterns</h4>
+<dl>
+{% for pattern in patterns %}
+
+<dt><strong><a class="remoteCall toggleTemplate" href="{{ pattern.get_absolute_url }}">{{ pattern.name }}</a></strong></dt>
+<dd>{{ pattern.module }}</dd>
+
+{% endfor %}
+</dl>
