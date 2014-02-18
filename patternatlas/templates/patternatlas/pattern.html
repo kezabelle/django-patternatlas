@@ -23,6 +23,7 @@
 {{ app_atlas.description }}
 {% for x in pattern_atlas %}
 <hr>
+<h2>&#8216;{{ x.name }}&#8217;</h2>
 {% if x.description %}{{ x.description }}{% endif %}
 {% endfor %}
 <a class="django-patternatlas-button" href="{% url 'patternatlas:app' kwargs.app_label %}">Back</a>
