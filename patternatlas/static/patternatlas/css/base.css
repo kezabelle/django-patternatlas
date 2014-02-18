@@ -82,3 +82,15 @@ body {
     font-weight: bold;
     color: #417690;
 }
+
+
+.django-patternatlas-pattern-escaped {
+    display: none;
+}
+
+.django-patternatlas-pattern a:hover + .django-patternatlas-pattern-escaped {
+    display: block;
+}
+.django-patternatlas-pattern-escaped:hover {
+    display: block;
+}

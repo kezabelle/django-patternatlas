@@ -1,7 +1,11 @@
 {% load pygmentify %}
 <section class="django-patternatlas-pattern">
+    <a href="{{ pattern.get_absolute_url }}#visual">Output</a>
+    <div class="django-patternatlas-pattern-output">
     {{ pattern.content|safe }}
+    </div>
 
+    <a href="{{ pattern.get_absolute_url }}#markup">Markup</a>
     <div class="django-patternatlas-pattern-escaped">
     {% pygment %}
     <pre lang="html">
