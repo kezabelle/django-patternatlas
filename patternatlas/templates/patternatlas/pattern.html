@@ -26,7 +26,7 @@
 <h2>&#8216;{{ x.name }}&#8217;</h2>
 {% if x.description %}{{ x.description }}{% endif %}
 {% endfor %}
-<a class="django-patternatlas-button" href="{% url 'patternatlas:app' kwargs.app_label %}">Back</a>
+<a class="django-patternatlas-button" href="{% url 'patternatlas:app' kwargs.app_label %}">Back to {{ app_atlas.0.module_name }}</a>
 {% endblock %}
 
 {% block content %}
