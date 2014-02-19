@@ -2,9 +2,13 @@
 <div class="djdt-pattern-list" style="float: left; width: 33%; height: 100%;">
 <dl>
 {% for pattern in patterns %}
-
+{% ifchanged pattern.module %}
+<dd {% if forloop.first %}style="display: none;"{% endif %}>
+<hr style="margin: 1em 0 border: 0; border-top: 1px solid #DDD;">
+</dd>
+{% endifchanged %}
 <dt><strong><a class="remoteIframe" href="{{ pattern.get_absolute_url }}#p-{{ pattern.get_short_ref }}">{{ pattern.name }}</a></strong></dt>
-<dd><a class="remoteIframe" href="{{ pattern.get_parent_url }}#p-{{ pattern.get_short_ref }}">{{ pattern.module }}</a></dd>
+<dd>part of &#8216;<a class="remoteIframe" href="{{ pattern.get_parent_url }}#p-{{ pattern.get_short_ref }}">{{ pattern.module_name }}</a>&#8217;</dd>
 
 {% endfor %}
 </dl>
