@@ -42,7 +42,7 @@ LONG_DESCRIPTION = "\r\n\r\n----\r\n\r\n".join(make_readme(HERE))
 
 setup(
     name="django-patternatlas",
-    version="0.2.1",
+    version="0.3.0",
     packages=find_packages(),
     install_requires=[
         'Django>=1.4.0',

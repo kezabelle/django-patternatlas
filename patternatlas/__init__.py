@@ -2,9 +2,9 @@
 from .models import is_pattern, Atlas, Pattern
 from .sitemaps import PatternSitemap
 
-__version_info__ = '0.2.1'
-__version__ = '0.2.1'
-version = '0.2.1'
+__version_info__ = '0.3.0'
+__version__ = '0.3.0'
+version = '0.3.0'
 
 __all__ = ['is_pattern', 'Atlas', 'Pattern', 'version', '__version__',
            '__version_info__', 'PatternSitemap']
