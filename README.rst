@@ -143,13 +143,16 @@ links to the individual pattern components, for use with
 Debug toolbar
 -------------
 
-There's a panel, ``patternatlas.panels.PatternPanel`` which you can add to your
+There's a panel for `django-debug-toolbar`_,
+``patternatlas.panels.PatternPanel`` which you can add to your
 ``DEBUG_TOOLBAR_PANELS`` setting. It allows previewing of individual patterns
 and whole pattern modules in an iframe while browsing the rest of your site.
 
 It might be useful for checking things are as expected::
 
     DEBUG_TOOLBAR_PANELS += ['patternatlas.panels.PatternPanel']
+
+.. _django-debug-toolbar: http://django-debug-toolbar.readthedocs.org/en/latest/
 
 Testing
 -------
