@@ -140,6 +140,17 @@ links to the individual pattern components, for use with
 
 .. _django.contrib.sitemaps: https://docs.djangoproject.com/en/dev/ref/contrib/sitemaps/
 
+Debug toolbar
+-------------
+
+There's a panel, ``patternatlas.panels.PatternPanel`` which you can add to your
+``DEBUG_TOOLBAR_PANELS`` setting. It allows previewing of individual patterns
+and whole pattern modules in an iframe while browsing the rest of your site.
+
+It might be useful for checking things are as expected::
+
+    DEBUG_TOOLBAR_PANELS += ['patternatlas.panels.PatternPanel']
+
 Testing
 -------
 

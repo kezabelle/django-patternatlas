@@ -9,6 +9,10 @@ body {
   height: 100%;
 }
 
+body.django-patternatlas-in-popup #djDebug {
+    display: none !important;
+}
+
 .django-patternatlas-container {
     background-color: white;
     min-height: 100%;
@@ -23,6 +27,10 @@ body {
     color: #ffc;
     overflow: hidden;
     width: 100%;
+}
+
+.django-patternatlas-header-hidden {
+    display: none;
 }
 
 .django-patternatlas-title {
