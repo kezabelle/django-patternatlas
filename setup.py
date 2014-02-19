@@ -45,7 +45,7 @@ setup(
     version="0.2.1",
     packages=find_packages(),
     install_requires=[
-        'Django>=1.4.0'
+        'Django>=1.4.0',
         'docutils>=0.11',
         'Sphinx>=1.2.1',
         'django-pygments>=0.1',
