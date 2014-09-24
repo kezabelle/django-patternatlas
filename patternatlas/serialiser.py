@@ -1,5 +1,8 @@
 from nap.serialiser import Serialiser
-from nap.fields import StringField
+try:
+    from nap.serialiser.fields import StringField
+except ImportError:  # old version of nap ... damn FB and his restructuring.
+    from nap.fields import StringField
 
 
 class PatternSerialiser(Serialiser):

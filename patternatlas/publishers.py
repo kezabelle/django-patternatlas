@@ -1,4 +1,7 @@
-from nap.publisher import Publisher
+try:
+    from nap.rest.publisher import Publisher
+except ImportError:  # old version of nap ... damn FB and his restructuring.
+    from nap.publisher import Publisher
 from nap.http import NotFound
 from .models import Atlas
 from .serialiser import PatternSerialiser
