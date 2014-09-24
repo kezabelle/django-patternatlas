@@ -1,4 +1,11 @@
-if (djdt !== void(0) && djdt.jQuery !== void(0)) {
+;if (djdt !== void(0)) {
+
+    // slightly older version of the debug_toolbar didn't namespace jQuery
+    // so we'll try to bind the one in the global namespace.
+    if (djdt.jQuery === void(0) && window.jQuery !== void(0)) {
+        djdt.jQuery = window.jQuery;
+    }
+
     (function ($) {
         $(document).on('click', '#djDebug .remoteIframe', function () {
             var self;
