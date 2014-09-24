@@ -73,7 +73,7 @@ body.django-patternatlas-in-popup #djDebug {
 
 .django-patternatlas-pattern {
     background-color: white;
-    padding: 1em;
+    padding: 1em 0;
     border-top: 1px solid #eee;
 }
 
@@ -92,13 +92,13 @@ body.django-patternatlas-in-popup #djDebug {
 }
 
 
-.django-patternatlas-pattern-escaped {
-    display: none;
-}
+/*.django-patternatlas-pattern-escaped {*/
+    /*display: none;*/
+/*}*/
 
-.django-patternatlas-pattern a:hover + .django-patternatlas-pattern-escaped {
-    display: block;
-}
-.django-patternatlas-pattern-escaped:hover {
-    display: block;
-}
+/*.django-patternatlas-pattern a:hover + .django-patternatlas-pattern-escaped {*/
+    /*display: block;*/
+/*}*/
+/*.django-patternatlas-pattern-escaped:hover {*/
+    /*display: block;*/
+/*}*/

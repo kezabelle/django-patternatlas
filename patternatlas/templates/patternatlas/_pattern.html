@@ -1,10 +1,11 @@
+{% load i18n %}
 <section class="django-patternatlas-pattern">
-    <a href="{{ pattern.get_absolute_url }}#visual">Output</a>
+    <h3>{% trans "Output" %}</h3>
     <div class="django-patternatlas-pattern-output">
     {{ pattern.content|safe }}
     </div>
 
-    <a href="{{ pattern.get_absolute_url }}#markup">Markup</a>
+    <h3>{% trans "Markup" %}</h3>
     <div class="django-patternatlas-pattern-escaped">
     {{ pattern.content_syntax_highlighted|safe }}
     </div>
