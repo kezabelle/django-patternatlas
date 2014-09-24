@@ -6,7 +6,7 @@
 {% block docs %}
 {{ app_atlas.description }}
 <a class="django-patternatlas-button" href="{% url 'patternatlas:index' %}">Back to home</a>
-{% if 'textonly' in request.GET %}
+{% if request_text_only %}
 <a class="django-patternatlas-button" href="{% url 'patternatlas:app' kwargs.app_label %}">Back to pattern list</a>
 {% else %}
 <a class="django-patternatlas-button" href="{% url 'patternatlas:app' kwargs.app_label %}?textonly">Pattern descriptions</a>
@@ -16,7 +16,7 @@
 {% block breadcrumbs %}
     {{ block.super }}
     {% url 'patternatlas:app' kwargs.app_label as CRUMB_URL %}
-    {% if request.path == CRUMB_URL %}
+    {% if request_path == CRUMB_URL %}
     <li class="active">{{ app_atlas.0.module_name }}</li>
     {% else %}
     <li><a href="{{ CRUMB_URL }}">{{ app_atlas.0.module_name }}</a></li>
@@ -25,7 +25,7 @@
 
 
 {% block content %}
-{% if 'textonly' not in request.GET %}
+{% if not request_text_only %}
     {% for x in app_atlas %}
         {% include "patternatlas/_pattern_complete.html" with pattern=x %}
     {% endfor %}

@@ -14,7 +14,7 @@
 
 {% block docs %}
 {% include "patternatlas/_root_readme.html" %}
-{% if 'textonly' in request.GET %}
+{% if request_text_only %}
     <a href="{% url 'patternatlas:index' %}" class="django-patternatlas-button">Back to pattern list</a>
 {% else %}
     <a href="{% url 'patternatlas:index' %}?textonly" class="django-patternatlas-button">Pattern descriptions</a>
@@ -23,7 +23,7 @@
 
 {% block breadcrumbs %}
     {% url 'patternatlas:index' as CRUMB_URL %}
-    {% if request.path == CRUMB_URL %}
+    {% if request_path == CRUMB_URL %}
     <li class="active">{% trans "Home" %}</li>
     {% else %}
     <li><a href="{{ CRUMB_URL }}">{% trans "Home" %}</a></li>
@@ -31,7 +31,7 @@
 {% endblock %}
 
 {% block content %}
-{% if 'textonly' not in request.GET %}
+{% if not request_text_only %}
     {% for x in atlas %}
         {% include "patternatlas/_pattern_complete.html" with pattern=x %}
     {% endfor %}

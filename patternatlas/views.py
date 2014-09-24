@@ -8,6 +8,9 @@ def root(request):
     context = {
         'atlas': atlas,
         'atlas_assets': atlas.assets(),
+        'request_text_only': 'textonly' in request.GET,
+        'request_path': request.path,
+        'request_popup': 'popup' in request.GET,
         'kwargs': {
             'app_label': None,
             'pattern_name': None,
@@ -25,6 +28,9 @@ def app(request, app_label):
         'atlas': master_atlas,
         'app_atlas': app_atlas,
         'atlas_assets': app_atlas.assets(),
+        'request_text_only': 'textonly' in request.GET,
+        'request_path': request.path,
+        'request_popup': 'popup' in request.GET,
         'kwargs': {
             'app_label': app_label,
             'pattern_name': None,
@@ -48,6 +54,9 @@ def pattern(request, app_label, pattern):
         'app_atlas': app_atlas,
         'pattern_atlas': pattern_atlas,
         'atlas_assets': pattern_atlas.assets(),
+        'request_text_only': 'textonly' in request.GET,
+        'request_path': request.path,
+        'request_popup': 'popup' in request.GET,
         'kwargs': {
             'app_label': app_label,
             'pattern_name': pattern,

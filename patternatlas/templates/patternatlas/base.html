@@ -13,11 +13,11 @@
         <link rel="stylesheet" type="text/css" href="{% static 'patternatlas/css/buttons.css' %}{% if debug %}?u={% now 'u' %}{% endif %}">
         {% block topassets %}{% endblock %}
     </head>
-    <body class="{% if request.GET.popup %}django-patternatlas-in-popup{% endif %}" id="">
+    <body class="{% if request_popup %}django-patternatlas-in-popup{% endif %}" id="">
         {# seriously if your css clashes with these classes you're crazy #}
         <div class="django-patternatlas-container">
 
-            <div class="django-patternatlas-header{% if request.GET.popup %}-hidden{% endif %}">
+            <div class="django-patternatlas-header{% if request_popup %}-hidden{% endif %}">
             <h1 class="django-patternatlas-title"><a href="{% url 'patternatlas:index' %}">Pattern atlas</a></h1>
             {% block header %}{% endblock %}
             </div>

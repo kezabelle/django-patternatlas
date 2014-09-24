@@ -68,7 +68,6 @@ d(
     TEMPLATE_CONTEXT_PROCESSORS=[
         "django.core.context_processors.media",
         "django.core.context_processors.static",
-        "django.core.context_processors.request",
         "django.contrib.auth.context_processors.auth",
     ],
     SESSION_ENGINE="django.contrib.sessions.backends.file",

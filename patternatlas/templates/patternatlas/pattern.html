@@ -12,7 +12,7 @@
 {% block breadcrumbs %}
     {{ block.super }}
     {% url 'patternatlas:pattern' kwargs.app_label kwargs.pattern_name as CRUMB_URL %}
-    {% if request.path == CRUMB_URL %}
+    {% if request_path == CRUMB_URL %}
     <li class="active">{{ pattern_atlas.0.name }}</li>
     {% else %}
     <li><a href="{{ CRUMB_URL }}">{{ pattern_atlas.0.name }}</a></li>
