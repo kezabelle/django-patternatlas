@@ -1,9 +1,28 @@
 {% load i18n %}
+{% load static %}
 <section class="django-patternatlas-pattern">
     <h3>{% trans "Output" %}</h3>
     <div class="django-patternatlas-pattern-output">
     {{ pattern.content|safe }}
     </div>
+
+    {% if pattern.assets.top or pattern.assets.bottom %}
+    <h3>{% trans "Depends on" %}</h3>
+    <div class="django-patternatlas-pattern-dependencies">
+        <ul class="django-patternatlas-pattern-dependencies-items">
+        {% for asset in pattern.assets.top %}
+        <li class="django-patternatlas-pattern-dependencies-item">
+            <a class="django-patternatlas-pattern-dependencies-link" href="{% static asset %}">{{ asset }}</a>
+        </li>
+        {% endfor %}
+        {% for asset in pattern.assets.bottom %}
+        <li class="django-patternatlas-pattern-dependencies-item">
+            <a class="django-patternatlas-pattern-dependencies-link" href="{% static asset %}">{{ asset }}</a>
+        </li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
 
     <h3>{% trans "Markup" %}</h3>
     <div class="django-patternatlas-pattern-escaped">
