@@ -13,7 +13,9 @@ try:
     from django.utils.text import camel_case_to_spaces as get_verbose_name
 except ImportError:  # pragma: no cover (Django < 1.7)
     from django.db.models.options import get_verbose_name
-from django.utils.encoding import python_2_unicode_compatible, force_text
+from django.utils.encoding import python_2_unicode_compatible
+from django.utils.encoding import force_text
+from django.utils.encoding import force_bytes
 from django.db import transaction
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -117,7 +119,7 @@ class Pattern(object):
 
     def get_unique_ref(self):
         return sha1(
-            force_text(' '.join((self.module, self.callable_name)))
+            force_bytes(' '.join((self.module, self.callable_name)))
         ).hexdigest()
 
     def get_short_ref(self):
