@@ -1,3 +1,4 @@
+import logging
 import sys
 import functools
 from hashlib import sha1
@@ -5,6 +6,9 @@ from itertools import chain
 from collections import defaultdict
 from docutils.core import publish_parts
 from sphinx.util.docstrings import prepare_docstring
+from pygments import highlight
+from pygments.lexers import HtmlLexer
+from pygments.formatters import HtmlFormatter
 try:
     from django.utils.text import camel_case_to_spaces as get_verbose_name
 except ImportError:  # pragma: no cover (Django < 1.7)
@@ -23,6 +27,9 @@ try:
 except ImportError:
     from django.template.defaultfilters import slugify
 from .templatetags.patternatlas import fix_raw_asset
+
+
+logger = logging.getLogger(__name__)
 
 
 @python_2_unicode_compatible
@@ -81,6 +88,16 @@ class Pattern(object):
         if self._content is None:
             self._content = self._get_content()
         return self._content
+
+    def content_syntax_highlighted(self):
+        lexer = HtmlLexer(stripall=True, encoding='utf-8')
+        formatter = HtmlFormatter(linenos=False, encoding='utf-8')
+        try:
+            return highlight(self.content(), lexer=lexer, formatter=formatter)
+        except:  # no idea wtf it could raise.
+            logger.error("Unable to use pygments to highlight given content",
+                         exc_info=1, extra={'request': self.request})
+            return '<unparsable>'
 
     def assets(self):
         if self._assets is None:
