@@ -2,11 +2,20 @@
 from __future__ import unicode_literals
 import os
 import sys
+import django  # we need to know if we're running under 1.7
 from importd import d
+
 
 HERE = os.path.realpath(os.path.dirname(__file__))
 PARENT = os.path.realpath(os.path.dirname(HERE))
 sys.path.append(PARENT)
+
+
+unsupported_installed_apps = set()
+# medusa doesn't support PY3K *or* 1.7 ...
+if not hasattr(django, 'setup') and sys.version_info.major == 2:
+    unsupported_installed_apps.add('django_medusa')
+
 
 d(
     SITE_ID=1,
@@ -27,9 +36,7 @@ d(
         "test_app",
         "another_test_app",
         "patternatlas",
-        "django_pygments",
-        "django_medusa",
-    ],
+    ] + list(unsupported_installed_apps),
     MIDDLEWARE_CLASSES=[
         "django.middleware.common.CommonMiddleware",
         "django.contrib.sessions.middleware.SessionMiddleware",
