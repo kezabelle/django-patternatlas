@@ -20,9 +20,12 @@
 {% endblock %}
 
 {% block docs %}
+{% if app_atlas.description %}
 {{ app_atlas.description }}
+{% endif %}
 {% for x in pattern_atlas %}
-<hr>
+{% if forloop.first and app_atlas.description %}<hr>{% endif %}
+{% if not forloop.first %}<hr>{% endif %}
 <h2>&#8216;{{ x.name }}&#8217;</h2>
 {% if x.description %}{{ x.description }}{% endif %}
 {% endfor %}
