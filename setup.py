@@ -48,7 +48,8 @@ setup(
         'Django>=1.4.0',
         'docutils>=0.11',
         'Sphinx>=1.2.1',
-        'Pygments>=1.6'
+        'Pygments>=1.6',
+        'beautifulsoup4>=4.3.2',
     ],
     author="Keryn Knight",
     author_email='python-package@kerynknight.com',

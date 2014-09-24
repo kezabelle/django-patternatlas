@@ -1,5 +1,6 @@
 import logging
 import sys
+from bs4 import BeautifulSoup
 import functools
 from hashlib import sha1
 from itertools import chain
@@ -94,8 +95,16 @@ class Pattern(object):
     def content_syntax_highlighted(self):
         lexer = HtmlLexer(stripall=True, encoding='utf-8')
         formatter = HtmlFormatter(linenos=False, encoding='utf-8')
+        content = self.content()
         try:
-            return highlight(self.content(), lexer=lexer, formatter=formatter)
+            soup = BeautifulSoup(content, ["html5lib", "lxml"])
+            content = soup.prettify(formatter=None)
+        except:  # noqa no idea wtf it could raise
+            logger.info("Unable to prettify with BeautifulSoup4, so just "
+                        "carry on and see if pygments can do something "
+                        "with it.", exc_info=1, extra={'request': self.request})
+        try:
+            return highlight(content, lexer=lexer, formatter=formatter)
         except:  # no idea wtf it could raise.
             logger.error("Unable to use pygments to highlight given content",
                          exc_info=1, extra={'request': self.request})
