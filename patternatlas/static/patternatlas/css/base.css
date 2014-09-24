@@ -9,7 +9,10 @@ body {
   height: 100%;
 }
 
-body.django-patternatlas-in-popup #djDebug {
+body.django-patternatlas-in-popup #djDebug,
+body.django-patternatlas-in-popup .django-patternatlas-header,
+body.django-patternatlas-in-popup .django-patternatlas-breadcrumbs,
+body.django-patternatlas-in-popup .django-patternatlas-button {
     display: none !important;
 }
 
