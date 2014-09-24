@@ -172,7 +172,9 @@ class Atlas(object):
         return resorted
 
     def discover(self):
-        discovered = set()
+        discovered_reprs = set()
+        discovered_patterns = []
+
         for app in settings.INSTALLED_APPS:
             module_path = '{0}.patterns'.format(app)
             try:
@@ -196,8 +198,11 @@ class Atlas(object):
                     definite_pattern = Pattern(
                         callable_pattern=probable_pattern,
                         request=self.request)
-                    discovered.add(definite_pattern)
-        self.discovered = self.sort(discovered)
+                    pattern_repr = repr(definite_pattern)
+                    if pattern_repr not in discovered_reprs:
+                        discovered_patterns.append(definite_pattern)
+                        discovered_reprs.add(pattern_repr)
+        self.discovered = self.sort(discovered_patterns)
         return self.discovered
 
     def app_labels_and_pattern_names(self):
@@ -243,20 +248,28 @@ class Atlas(object):
     #                           if x.callable_name == name))
 
     def only_app(self, app_label):
-        found = set()
+        found_reprs = set()
+        found_patterns = []
         for pattern in self:
             if pattern.module == app_label:
-                found.add(pattern)
-        return self.__class__(presets=found, request=self.request)
+                pattern_repr = repr(pattern)
+                if pattern_repr not in found_reprs:
+                    found_patterns.append(pattern)
+                    found_reprs.add(pattern_repr)
+        return self.__class__(presets=found_patterns, request=self.request)
 
     def only_app_pattern(self, app_label, pattern_name):
-        found = set()
+        found_reprs = set()
+        found_patterns = []
         for pattern in self:
             is_in_app = pattern.module == app_label
             is_pattern_name = pattern.callable_name == pattern_name
             if is_in_app and is_pattern_name:
-                found.add(pattern)
-        return self.__class__(presets=found, request=self.request)
+                pattern_repr = repr(pattern)
+                if pattern_repr not in found_reprs:
+                    found_patterns.append(pattern)
+                    found_reprs.add(pattern_repr)
+        return self.__class__(presets=found_patterns, request=self.request)
 
     def __contains__(self, obj):
         return obj in self.discovered
